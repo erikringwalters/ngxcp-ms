@@ -9,7 +9,7 @@ public class DataController{
     
     @GetMapping("/Data")
     @ResponseBody
-    String getHeroes () {
+    String getData () {
         return "Data response.";
     }
 }

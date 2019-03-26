@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DataServiceApplication",
+            "request": "launch",
+            "mainClass": "csumbcapstonegroup22spring2019.dataservice.DataServiceApplication",
+            "projectName": "DataService"
+        }
+    ]
+}
