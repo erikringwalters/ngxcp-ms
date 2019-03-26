@@ -1,4 +1,4 @@
-package csumbcapstonegroup22spring2019.DataService;
+package csumbcapstonegroup22spring2019.dataservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
