@@ -6,7 +6,8 @@ public class Hero {
     private Powers powers;
     private String id;
 
-    public Hero (Identity identity, AlterEgo alterEgo, Powers powers) {
+    public Hero (String id, Identity identity, AlterEgo alterEgo, Powers powers) {
+        super();
         this.id = id;
         this.identity = identity;
         this.alterEgo = alterEgo;

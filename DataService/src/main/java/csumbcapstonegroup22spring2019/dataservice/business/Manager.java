@@ -15,7 +15,7 @@ public class Manager {
 
     //TODO: use business entities rather than api/presentation layer entities.
 
-    public List<Hero> getHerolist () {
+    public List<Hero> getHeroList () {
         return null;
     }
 }
