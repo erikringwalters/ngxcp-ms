@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.internal.runners.statements.ExpectException;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,13 +33,32 @@ public class ManagerTester {
     @MockBean
     HeroDbClient heroDb;
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
     public void getHeroListReturnsEmptyListWhenNullHeroesInDb() {
         when(heroDb.getHeroData()).thenReturn(null);
         Assert.assertEquals(null, manager.getHeroList());
     }
 
-    
+    @Test
+   public void getHeroListReturnsExpectedResults () {
+       when(heroDb.getHeroData()).thenReturn(FiveStandardHerosStub());
+       List<Hero> expectedHeroes = FiveStandardHerosStub();
+       List<Hero> actualHeroes = manager.getHeroList();
+       // todo: use library or manually implement equals() for list-to-list .equals() comarison
+       Assert.assertTrue(expectedHeroes.get(1).getIdentity().getName().equals(
+           actualHeroes.get(1).getIdentity().getName()));
+   }
+
+   @Test
+   public void getHeroListPercolatesExceptionWhenThrownAtLowerLevel () {
+       when(heroDb.getHeroData()).thenThrow(new RuntimeException("Test"));
+       expectedException.expect(RuntimeException.class);
+       manager.getHeroList();
+   }
+
     private List<Hero> FiveStandardHerosStub () {
         List<Hero> result = new ArrayList<Hero>();
         Hero h1 = new Hero("1", new Identity("1"), new AlterEgo("a"), new Powers(Arrays.asList("l","m","o")));
